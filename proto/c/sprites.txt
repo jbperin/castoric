@@ -1,0 +1,20 @@
+
+CamPos
+CamRot
+
+ObjectType, 
+ObjectPos
+ObjectRot
+
+ObjectDistance (CamPos, ObjectPos)
+
+ObjectHeight (ObjectDistance)
+
+ObjectDisplayColumn (CamPos, CamRot, ObjectPos)
+ObjectVisibility (Height, ObjectDisplayColumn)
+
+ObjectDisplayState (CamRot, ObjectRot, [ObjectDistance])
+
+ListOfVisibleObjectSortedByDistance
+([SpriteColumn, SpriteHeight, SpriteTexture])
+

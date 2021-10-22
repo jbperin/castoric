@@ -36,6 +36,9 @@ unsigned char           *baseAdr;
 #include "sprite.c"
 #include "texture_pillar.h"
 #endif
+#include "dist.c"
+#include "engine.c"
+
 
 void initCamera(){
     rayCamPosX               = 0; // 0; // -62; // 39;  //
@@ -60,7 +63,8 @@ void textCol () {
 
 
 void main(){
-
+    int ii;
+    unsigned char res;
     printf ("DEBUT\n");
     initCamera();
 
@@ -70,12 +74,54 @@ void main(){
     rayProcessPoints();
     rayProcessWalls();
 
-    textCol ();
+    // textCol ();
 
     // drawWalls();
 #ifdef USE_SPRITE    
     drawSprite (3, 3, texture_pillar);
 #endif // USE_SPRITE
+
+
+    engInitObjects();
+    engAddObject(OBJ_KEY, 3, 3, 0);
+    engAddObject(OBJ_SOLDIER, 3, -3, soldier_data);
+    for (ii=0 ; ii < 4; ii++){
+        
+        engPulse();
+    }
+    rayCamRotZ = -111;
+    res = computeRelativeOrientation (0, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (16, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (32, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (48, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (64, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (80, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (96, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (112, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (-127, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (-111, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (-95, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (-79, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (-63, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (-47, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (-31, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
+    res = computeRelativeOrientation (-15, rayCamRotZ);
+    printf ("res = %d\n====\n", res);
     printf ("FIN\n");
 }
 

@@ -30,6 +30,9 @@
 #define CHANGE_INK_TO_GREEN	            2		
 #define CHANGE_INK_TO_BLUE	            4		
 
+#include "dichobuf.c"
+#include "dist.c"
+#include "engine.c"
 
 void prepareRGB(){
     int ii;
@@ -95,16 +98,7 @@ void gameLoop() {
             refreshNeeded = 0;
             printf("\n(X=%d Y=%d) [a=%d] [t=%d]\n\n", rayCamPosX, rayCamPosY, rayCamRotZ, 65535-deek(630));
             if (hasKey) printf ("Key");
-        }
-        // for (ii = 0; ii <= VIEWPORT_HEIGHT; ii++) {
-        //     drawTexelOnScreen (ii, 40-VIEWPORT_WIDTH/2, 63);
-        //     drawTexelOnScreen (ii, 40+VIEWPORT_WIDTH/2, 63);
-        // }
-        // for (ii=0 ; ii < VIEWPORT_WIDTH/2; ii++){
-        //     drawTexelOnScreen (VIEWPORT_HEIGHT, 40+ii, 63);
-        //     drawTexelOnScreen (VIEWPORT_HEIGHT, 40-ii, 63);
-        // }
-        
+        }       
     }
 }
 
