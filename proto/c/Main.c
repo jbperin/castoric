@@ -66,7 +66,7 @@ void gameLoop() {
     int ii;
     engInitObjects();
     engAddObject(OBJ_KEY, 3, 3, 0);
-    engAddObject(OBJ_SOLDIER, 3, -3, soldier_data);
+    // engAddObject(OBJ_SOLDIER, 3, -3, soldier_data);
 
     while (running) {
 
@@ -119,7 +119,7 @@ void gameLoop() {
 }
 
 void main(){
-
+    int ii, jj;
     printf ("DEBUT\n");
 
     // [res camera_situation]]
@@ -152,6 +152,21 @@ void main(){
 #endif
     running = 1;
     refreshNeeded           = 1;
+#define BORDER_COLOR 10
+    for (ii=VIEWPORT_START_COLUMN-1; ii<= VIEWPORT_WIDTH+VIEWPORT_START_COLUMN; ii++){
+        drawTexelOnScreen (VIEWPORT_START_LINE-2, ii, BORDER_COLOR);
+        drawTexelOnScreen (VIEWPORT_START_LINE-1, ii, BORDER_COLOR);
+        drawTexelOnScreen (VIEWPORT_START_LINE+VIEWPORT_HEIGHT, ii, BORDER_COLOR);
+        drawTexelOnScreen (VIEWPORT_START_LINE+VIEWPORT_HEIGHT+1, ii, BORDER_COLOR);
+    }
+    for (ii=VIEWPORT_START_LINE; ii< VIEWPORT_HEIGHT+VIEWPORT_START_LINE; ii++){
+        drawTexelOnScreen (ii, VIEWPORT_START_COLUMN-1, BORDER_COLOR);
+        drawTexelOnScreen (ii, VIEWPORT_START_COLUMN, BORDER_COLOR);
+        drawTexelOnScreen (ii, VIEWPORT_START_COLUMN+VIEWPORT_WIDTH, BORDER_COLOR);
+        drawTexelOnScreen (ii, VIEWPORT_START_COLUMN+VIEWPORT_WIDTH-1, BORDER_COLOR);
+    }
+    
+
     gameLoop();
 	
 }

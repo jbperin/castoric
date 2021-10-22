@@ -78,18 +78,18 @@ void drawTexelOnScreen (signed char line, signed char column, unsigned char theC
 
         adr = (unsigned char *)(HIRES_SCREEN_ADDRESS + multi40[(line<<1) + line] + (column>>1));
 
-        if ((column&0x01) == 0){
-            *adr = tabLeftRed[theColor];
+        if ((column&0x01) == 1){
+            *adr = tabLeftRed[theColor]|((*adr)&0x07);
             adr += NEXT_SCANLINE_INCREMENT;
-            *adr = tabLeftGreen[theColor];
+            *adr = tabLeftGreen[theColor]|((*adr)&0x07);
             adr += NEXT_SCANLINE_INCREMENT;
-            *adr = tabLeftBlue[theColor];
+            *adr = tabLeftBlue[theColor]|((*adr)&0x07);
         } else {
-            *adr |= tabLeftRed[theColor];
+            *adr = ((*adr)&0xF8) | tabRightRed[theColor];
             adr += NEXT_SCANLINE_INCREMENT;
-            *adr |= tabLeftGreen[theColor];
+            *adr = ((*adr)&0xF8) | tabRightGreen[theColor];
             adr += NEXT_SCANLINE_INCREMENT;
-            *adr |= tabLeftBlue[theColor];
+            *adr = ((*adr)&0xF8) | tabRightBlue[theColor];
         }
 
     }

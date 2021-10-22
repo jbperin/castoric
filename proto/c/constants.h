@@ -5,7 +5,7 @@
 
 // [ref config_viewport]
 
-#define VIEWPORT_HEIGHT                 62
+#define VIEWPORT_HEIGHT                 60
 #define VIEWPORT_WIDTH                  74
 #define VIEWPORT_START_COLUMN           3
 #define VIEWPORT_START_LINE             2

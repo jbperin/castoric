@@ -33,6 +33,7 @@
 #undef     USE_C_DISTOFFSETSLICES
 #define   USE_ASM_LOGTRIGO
 #undef USE_C_GENERIC_COLLISION
+#define USE_SLOW_TEXEL
 #endif
 
 #endif // CONFIG_H
