@@ -63,8 +63,13 @@ void initCamera(){
 
 
 void gameLoop() {
+    int ii;
+    engInitObjects();
+    engAddObject(OBJ_KEY, 3, 3, 0);
+    engAddObject(OBJ_SOLDIER, 3, -3, soldier_data);
 
     while (running) {
+
         doke(630,0);
 
         if ((doorState==1) && (scene_00[2+4*2] != 6)) {
@@ -76,6 +81,17 @@ void gameLoop() {
         } else {
             player ();
         }
+
+        dichoInit();
+        engPulse();
+
+        ii= dichoNbVal;
+        while (ii >0) {
+            ii -= 1;
+            // printf("%d\t", tabDichoIdxs[ii]);
+            drawSprite (objPosX[tabDichoIdxs[ii]], objPosY[tabDichoIdxs[ii]], objTexture[tabDichoIdxs[ii]]);
+        }
+
 
         if (refreshNeeded) {
             rayInitCasting();

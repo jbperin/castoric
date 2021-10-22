@@ -11,12 +11,13 @@ unsigned char   objActive   [OBJECTS_MAX];
 signed char     objPosX     [OBJECTS_MAX];
 signed char     objPosY     [OBJECTS_MAX];
 char *          objData     [OBJECTS_MAX];
+unsigned char * objTexture  [OBJECTS_MAX];
 
 static unsigned char engNbObject;
 static unsigned char engCurrentObjectIdx;
 
 void keyUpdate();
-signed char soldier_data [] = {32};
+char soldier_data [] = {32};
 void soldierUpdate();
 
 
@@ -47,9 +48,14 @@ void engPulse() {
 
 void keyUpdate()
 {
+    unsigned char ldist;
 	unsigned char ex = objPosX[engCurrentObjectIdx];
     unsigned char ey = objPosY[engCurrentObjectIdx];
-    printf ("key pulse\n");
+    // printf ("key pulse\n");
+    ldist = computeLogDist (ex, ey);
+    dichoInsert (engCurrentObjectIdx, ldist);
+
+    objTexture[engCurrentObjectIdx] = texture_aKey;
     objPosX[engCurrentObjectIdx] = ex;
     objPosY[engCurrentObjectIdx] = ey;
 }
@@ -57,16 +63,34 @@ void keyUpdate()
 void soldierUpdate()
 {
     unsigned char ldist;
+    unsigned char displaystate;
 	signed char ex = objPosX[engCurrentObjectIdx];
     signed char ey = objPosY[engCurrentObjectIdx];
 
     ex+=1;
     ey+=1;
+
     ldist = computeLogDist (ex, ey);
-    printf ("soldier pulse (%d %d) %d \n", ex, ey, ldist);
+    dichoInsert (engCurrentObjectIdx, ldist);
+
+    // printf ("soldier pulse (%d %d) %d \n", ex, ey, ldist);
     *(objData[engCurrentObjectIdx]) += 32;
     // computeRelativeOrientation (*(objData[engCurrentObjectIdx]));
-
+    displaystate = computeRelativeOrientation (*(objData[engCurrentObjectIdx]), rayCamRotZ);
+    switch (displaystate) {
+        case 0:
+            objTexture[engCurrentObjectIdx] = texture_aKey; // ptrTextureSoldierBack;
+            break;
+        case 1:
+            objTexture[engCurrentObjectIdx] = texture_aKey; // ptrTextureSoldierRight;
+            break;
+        case 2:
+            objTexture[engCurrentObjectIdx] = texture_aKey; // ptrTextureSoldierFront;
+            break;
+        case 3:
+            objTexture[engCurrentObjectIdx] = texture_aKey; // ptrTextureSoldierLeft;
+            break;
+    }
     objPosX[engCurrentObjectIdx] = ex;
     objPosY[engCurrentObjectIdx] = ey;
 }
