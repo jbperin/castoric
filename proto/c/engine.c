@@ -55,7 +55,7 @@ void keyUpdate()
     ldist = computeLogDist (ex, ey);
     dichoInsert (engCurrentObjectIdx, ldist);
 
-    objTexture[engCurrentObjectIdx] = texture_aKey;
+    // objTexture[engCurrentObjectIdx] = texture_aKey;
     objPosX[engCurrentObjectIdx] = ex;
     objPosY[engCurrentObjectIdx] = ey;
 }
@@ -64,35 +64,60 @@ void soldierUpdate()
 {
     unsigned char ldist;
     unsigned char displaystate;
+    signed char direction;
+    signed char sex, sey;
 	signed char ex = objPosX[engCurrentObjectIdx];
     signed char ey = objPosY[engCurrentObjectIdx];
-
-    ex+=1;
-    ey+=1;
-
+    sex = ex;
+    sey = ey;
+    direction = *(objData[engCurrentObjectIdx]);
+    if (-112 >= direction) {
+        ex--;
+    } else if ((-112 < direction) && (-80 >= direction)) {
+        ex--; ey--;
+    } else if ((-80 < direction) && (-48 >= direction)) {
+        ey--;
+    } else if ((-48 < direction) && (-16 >= direction)) {
+        ex++; ey--;
+    } else if ((-16 < direction) && (16 >= direction)) {
+        ex++;
+    } else if ((16 < direction) && (48 >= direction)) {
+        ex++; ey++;
+    } else if ((48 < direction) && (80 >= direction)) {
+        ey++;
+    } else if ((80 < direction) && (112 >= direction)) {
+        ex--; ey++;
+    } else {
+        ex--;
+    }
+    if (isInWall(ex, ey)) {
+         direction += 16;
+         *(objData[engCurrentObjectIdx]) = direction;
+         ex = sex;
+         ey = sey;
+    }
     ldist = computeLogDist (ex, ey);
     dichoInsert (engCurrentObjectIdx, ldist);
 
-    // printf ("soldier pulse (%d %d) %d \n", ex, ey, ldist);
-    *(objData[engCurrentObjectIdx]) += 32;
     // computeRelativeOrientation (*(objData[engCurrentObjectIdx]));
-    displaystate = computeRelativeOrientation (*(objData[engCurrentObjectIdx]), rayCamRotZ);
+    displaystate = computeRelativeOrientation (direction, rayCamRotZ);
     switch (displaystate) {
         case 0:
-            objTexture[engCurrentObjectIdx] = texture_aKey; // ptrTextureSoldierBack;
+            objTexture[engCurrentObjectIdx] = texture_soldier_back_00; // ptrTextureSoldierBack;
             break;
         case 1:
-            objTexture[engCurrentObjectIdx] = texture_aKey; // ptrTextureSoldierRight;
+            objTexture[engCurrentObjectIdx] = texture_soldier_left_00; // ptrTextureSoldierRight;
             break;
         case 2:
-            objTexture[engCurrentObjectIdx] = texture_aKey; // ptrTextureSoldierFront;
+            objTexture[engCurrentObjectIdx] = texture_soldier_front_00; // ptrTextureSoldierFront;
             break;
         case 3:
-            objTexture[engCurrentObjectIdx] = texture_aKey; // ptrTextureSoldierLeft;
+            objTexture[engCurrentObjectIdx] = texture_soldier_right_00; // ptrTextureSoldierLeft;
             break;
     }
     objPosX[engCurrentObjectIdx] = ex;
     objPosY[engCurrentObjectIdx] = ey;
+    refreshNeeded = 1;
 }
 
 void engInitObjects()

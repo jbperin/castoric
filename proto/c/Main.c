@@ -23,9 +23,14 @@
 
 #ifdef USE_SPRITE
 #include "sprite.c"
-#include "texture_key.h"
+// #include "texture_key.h"
+#include "texture_soldier_back_00.h"
+#include "texture_soldier_front_00.h"
+#include "texture_soldier_left_00.h"
+#include "texture_soldier_right_00.h"
 #endif
 
+#define CHANGE_INK_TO_BLACK	            0
 #define CHANGE_INK_TO_RED	            1		
 #define CHANGE_INK_TO_GREEN	            2		
 #define CHANGE_INK_TO_BLUE	            4		
@@ -65,8 +70,8 @@ void initCamera(){
 void gameLoop() {
     int ii;
     engInitObjects();
-    engAddObject(OBJ_KEY, 3, 3, 0);
-    // engAddObject(OBJ_SOLDIER, 3, -3, soldier_data);
+    // engAddObject(OBJ_KEY, 3, 3, 0);
+    engAddObject(OBJ_SOLDIER, 1, 2, soldier_data);
 
     while (running) {
 
@@ -112,15 +117,15 @@ void gameLoop() {
             // if (! hasKey) drawSprite (3, 3, texture_aKey);
 #endif
             refreshNeeded = 0;
-            printf("\n(X=%d Y=%d) [a=%d] [t=%d]\n\n", rayCamPosX, rayCamPosY, rayCamRotZ, 65535-deek(630));
-            if (hasKey) printf ("Key");
+            // printf("\n(X=%d Y=%d) [a=%d] [t=%d]\n\n", rayCamPosX, rayCamPosY, rayCamRotZ, 65535-deek(630));
+            // if (hasKey) printf ("Key");
         }       
     }
 }
 
 void main(){
     int ii, jj;
-    printf ("DEBUT\n");
+    // printf ("DEBUT\n");
 
     // [res camera_situation]]
     initCamera();
@@ -144,7 +149,74 @@ void main(){
 #endif
 
     hires();
+    paper(4);
+    // ink(7);
     prepareRGB();
+    *((unsigned char *)0x26A)= 10;
+    *((unsigned char *)49000)= 0x14;
+    *((unsigned char *)49040)= 0x14;
+    *((unsigned char *)49080)= 0x14;
+    *((unsigned char *)49001)= 7;
+    *((unsigned char *)49041)= 7;
+    *((unsigned char *)49081)= 7;
+    *((unsigned char *)49043)= 10;
+    *((unsigned char *)49083)= 10;
+    *((unsigned char *)49004)= 124;
+    *((unsigned char *)49044)= 124;
+    *((unsigned char *)49084)= 124;
+    *((unsigned char *)49007)= 80;
+    *((unsigned char *)49008)= 69;
+    *((unsigned char *)49009)= 65;
+    *((unsigned char *)49010)= 67;
+    *((unsigned char *)49011)= 69;
+    *((unsigned char *)49012)= 20;
+    *((unsigned char *)49048)= 49;
+    *((unsigned char *)49088)= 49;
+    *((unsigned char *)49049)= 48;
+    *((unsigned char *)49089)= 48;
+    *((unsigned char *)49050)= 48;
+    *((unsigned char *)49090)= 48;
+    *((unsigned char *)49051)= 37;
+    *((unsigned char *)49091)= 37;
+    *((unsigned char *)49014)= 124;
+    *((unsigned char *)49054)= 124;
+    *((unsigned char *)49094)= 124;
+    *((unsigned char *)49015)= 9;
+    *((unsigned char *)49055)= 9;
+    *((unsigned char *)49095)= 9;
+    *((unsigned char *)49057)= 65;
+    *((unsigned char *)49058)= 50;
+    *((unsigned char *)49097)= 40;
+    *((unsigned char *)49098)= 36;
+    *((unsigned char *)49099)= 32;
+    *((unsigned char *)49020)= 8;
+    *((unsigned char *)49060)= 10;
+    *((unsigned char *)49100)= 10;
+    *((unsigned char *)49021)= 124;
+    *((unsigned char *)49061)= 124;
+    *((unsigned char *)49101)= 124;
+    *((unsigned char *)49023)= 76;
+    *((unsigned char *)49024)= 79;
+    *((unsigned char *)49025)= 86;
+    *((unsigned char *)49026)= 69;
+    *((unsigned char *)49065)= 49;
+    *((unsigned char *)49105)= 49;
+    *((unsigned char *)49066)= 50;
+    *((unsigned char *)49106)= 50;
+    *((unsigned char *)49028)= 124;
+    *((unsigned char *)49068)= 124;
+    *((unsigned char *)49108)= 124;
+    *((unsigned char *)49030)= 70;
+    *((unsigned char *)49031)= 76;
+    *((unsigned char *)49032)= 79;
+    *((unsigned char *)49033)= 87;
+    *((unsigned char *)49034)= 69;
+    *((unsigned char *)49035)= 82;
+    *((unsigned char *)49072)= 51;
+    *((unsigned char *)49112)= 51;
+    *((unsigned char *)49036)= 124;
+    *((unsigned char *)49076)= 124;
+    *((unsigned char *)49116)= 124;
 
 #ifdef DEBUG
     drawWalls();
@@ -165,6 +237,11 @@ void main(){
         drawTexelOnScreen (ii, VIEWPORT_START_COLUMN+VIEWPORT_WIDTH, BORDER_COLOR);
         drawTexelOnScreen (ii, VIEWPORT_START_COLUMN+VIEWPORT_WIDTH-1, BORDER_COLOR);
     }
+    // poke (0xBBA3, CHANGE_INK_TO_BLACK);
+    // sprintf ((void *)(0xBB80+24*40), "LIFE AMMO");//"\033DLIFE      AMMO \033G");
+    // sprintf ((void *)(0xBB80+25*40), "LIFE AMMO");//"\033DLIFE      AMMO \033G");
+    // sprintf ((void *)(0xBB80+26*40), "\012\004  100 10");
+    // sprintf ((void *)(0xBB80+27*40), "\012\004  100 10");
     
 
     gameLoop();
