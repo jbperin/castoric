@@ -3,8 +3,9 @@
 #define OBJECTS_MAX 18
 
 // objects
-#define OBJ_KEY 1
-#define OBJ_SOLDIER 2
+#define OBJ_SOLDIER 1
+#define OBJ_AMMO    2
+#define OBJ_HEALTH  3
 
 unsigned char   objType     [OBJECTS_MAX];
 unsigned char   objActive   [OBJECTS_MAX];
@@ -13,8 +14,8 @@ signed char     objPosY     [OBJECTS_MAX];
 char *          objData     [OBJECTS_MAX];
 unsigned char * objTexture  [OBJECTS_MAX];
 
-static unsigned char engNbObject;
-static unsigned char engCurrentObjectIdx;
+// static unsigned char engNbObject;
+unsigned char engCurrentObjectIdx;
 
 void keyUpdate();
 char soldier_data [] = {32};
@@ -25,8 +26,9 @@ void engObjectPulse()
 {
     switch (objType[engCurrentObjectIdx])
     {
-        case OBJ_KEY:
-            keyUpdate();
+        case OBJ_AMMO:
+        case OBJ_HEALTH:
+            dichoInsert (engCurrentObjectIdx, computeLogDist (objPosX[engCurrentObjectIdx], objPosY[engCurrentObjectIdx]));
             break;
         case OBJ_SOLDIER:
             soldierUpdate();
@@ -35,30 +37,43 @@ void engObjectPulse()
 }
 
 void engPulse() {
-    engNbObject = 0;
-    for (engCurrentObjectIdx = 0; engCurrentObjectIdx < OBJECTS_MAX; engCurrentObjectIdx++) {
-        if (objActive[engCurrentObjectIdx]) {
-            engNbObject++;
-            engObjectPulse();
-        }
+    // engNbObject = 0;
+    // for (engCurrentObjectIdx = 0; engCurrentObjectIdx < OBJECTS_MAX; engCurrentObjectIdx++) {
+    //     if (objActive[engCurrentObjectIdx]) {
+    //         // engNbObject++;
+    //         engObjectPulse();
+    //     }
+    // }
+
+    {
+        asm (
+            "ldy #17: sty _engCurrentObjectIdx:"
+            "engPulseLoop:"
+                "lda _objActive, y:"
+                "beq EndIfObjectIsActive:"
+                    "jsr _engObjectPulse:"
+                "EndIfObjectIsActive:"
+                "dec _engCurrentObjectIdx: ldy _engCurrentObjectIdx: bpl engPulseLoop:"
+            "engPulseEndLoop:"
+        );
     }
 }
 
 
 
-void keyUpdate()
-{
-    unsigned char ldist;
-	unsigned char ex = objPosX[engCurrentObjectIdx];
-    unsigned char ey = objPosY[engCurrentObjectIdx];
-    // printf ("key pulse\n");
-    ldist = computeLogDist (ex, ey);
-    dichoInsert (engCurrentObjectIdx, ldist);
+// void keyUpdate()
+// {
+// 	// unsigned char ex = objPosX[engCurrentObjectIdx];
+//     // unsigned char ey = objPosY[engCurrentObjectIdx];
+//     // printf ("key pulse\n");
+//     // ldist = computeLogDist (objPosX[engCurrentObjectIdx], objPosY[engCurrentObjectIdx]);
+//     dichoInsert (engCurrentObjectIdx, computeLogDist (objPosX[engCurrentObjectIdx], objPosY[engCurrentObjectIdx]));
 
-    objTexture[engCurrentObjectIdx] = texture_aKey;
-    objPosX[engCurrentObjectIdx] = ex;
-    objPosY[engCurrentObjectIdx] = ey;
-}
+//     objTexture[engCurrentObjectIdx] = texture_aKey;
+//     // objPosX[engCurrentObjectIdx] = ex;
+//     // objPosY[engCurrentObjectIdx] = ey;
+// }
+
 
 void soldierUpdate()
 {
@@ -122,9 +137,14 @@ void soldierUpdate()
 
 void engInitObjects()
 {
-    unsigned char i;
-    for (i = 0; i < OBJECTS_MAX; i++) objActive[i] = 0;
-
+    // unsigned char i;
+    // for (i = 0; i < OBJECTS_MAX; i++) objActive[i] = 0;
+    {asm(
+        "ldy #17:"
+        "lda #0:"
+        "loopEngInitObjects:"
+        "sta _objActive, y:dey:bpl loopEngInitObjects:"
+    );}
 }
 
 void engAddObject(char type, signed char x, signed char y, char *data)
@@ -144,16 +164,16 @@ void engAddObject(char type, signed char x, signed char y, char *data)
     }
 }
 
-void engDeleteObject(unsigned char objectNumber) {
-    objActive[objectNumber] = 0;
-}
+// void engDeleteObject(unsigned char objectNumber) {
+//     objActive[objectNumber] = 0;
+// }
 
-void engDeleteAllObjects(unsigned char objectType) {
-    unsigned char i;
-    for (i = 0; i < OBJECTS_MAX; i++)
-        if (1 == objActive[i] && objectType == objType[i])
-            objActive[i] = 0;
-}
+// void engDeleteAllObjects(unsigned char objectType) {
+//     unsigned char i;
+//     for (i = 0; i < OBJECTS_MAX; i++)
+//         if (1 == objActive[i] && objectType == objType[i])
+//             objActive[i] = 0;
+// }
 
 
 // void main () {

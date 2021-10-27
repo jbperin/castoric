@@ -1,7 +1,8 @@
 
 // [ref texture_file2buffer]
 // #include "texture_christmas.h"
-#include "texture_bluestone.h"
+// #include "texture_bluestone.h"
+#include "texture_greystone.h"
 // #include "texture_redbrick.h"
 // #include "texture_logo.h"
 // #include "textures/texture_bigbricks.h"
@@ -33,10 +34,10 @@ signed char scene_00[] = {
 
 // [ref texture_file2buffer]
 unsigned char *texture_00[]= {
-	texture_bluestone // texture_christmas // texture_bigbricks		// W0
-	, texture_bluestone // , texture_bigleaves		// W1
-	, texture_bluestone // texture_redbrick //, texture_bigsquares		// W2
-	, texture_bluestone // texture_logo // , texture_dentwall			// W3
+	texture_greystone // texture_christmas // texture_bigbricks		// W0
+	, texture_greystone // , texture_bigleaves		// W1
+	, texture_greystone // texture_redbrick //, texture_bigsquares		// W2
+	, texture_greystone // texture_logo // , texture_dentwall			// W3
 };
 
 

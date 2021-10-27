@@ -23,7 +23,8 @@
 
 #ifdef USE_SPRITE
 #include "sprite.c"
-#include "texture_key.h"
+#include "texture_ammo.h"
+#include "texture_health.h"
 #include "texture_soldier_back_00.h"
 #include "texture_soldier_front_00.h"
 #include "texture_soldier_left_00.h"
@@ -69,9 +70,16 @@ void initCamera(){
 
 void gameLoop() {
     int ii;
+
     engInitObjects();
-    engAddObject(OBJ_KEY, 3, 3, 0);
     engAddObject(OBJ_SOLDIER, 1, 2, soldier_data);
+
+    engAddObject(OBJ_HEALTH, 3, 3, 0);
+    objTexture[1] = texture_health;
+
+    // engAddObject(OBJ_AMMO, -3, 3, 0);
+    // objTexture[2] = texture_ammo;
+
 
     while (running) {
 
@@ -98,17 +106,14 @@ void gameLoop() {
             rayProcessPoints();
             rayProcessWalls();
 
-            // clearViewport();
             drawWalls();
 #ifdef USE_SPRITE
-            // logdist(signed char posX, signed char posY) 
             if ((rayCamPosX == 3) && (rayCamPosY == 3)){
-                if (hasKey == 0) {
+                if (objActive[1] == 1) {
                     zap();
+                    objActive[1] = 0;
                 }
-                hasKey = 1;
             }
-            // if (! hasKey) drawSprite (3, 3, texture_aKey);
 #endif
             refreshNeeded = 0;
             // printf("\n(X=%d Y=%d) [a=%d] [t=%d]\n\n", rayCamPosX, rayCamPosY, rayCamRotZ, 65535-deek(630));
