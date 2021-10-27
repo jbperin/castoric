@@ -55,7 +55,7 @@ void keyUpdate()
     ldist = computeLogDist (ex, ey);
     dichoInsert (engCurrentObjectIdx, ldist);
 
-    // objTexture[engCurrentObjectIdx] = texture_aKey;
+    objTexture[engCurrentObjectIdx] = texture_aKey;
     objPosX[engCurrentObjectIdx] = ex;
     objPosY[engCurrentObjectIdx] = ey;
 }

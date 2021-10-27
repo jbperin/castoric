@@ -7,9 +7,19 @@ unsigned char dichoNbVal = 0;
 unsigned char tabDichoVals [DICHO_NB_MAX_VAL];
 unsigned char tabDichoIdxs [DICHO_NB_MAX_VAL];
 
+
+#ifndef USE_C_DICHOBUF
+extern unsigned char dichoInsertVal;
+extern unsigned char dichoInsertIdx;
+#endif
+
+
+#ifdef USE_C_DICHOBUF
+
 void dichoInit(){
     dichoNbVal = 0;
 }
+
 unsigned char dichoSearchPos(unsigned char val) {
     unsigned char insertPos;
 
@@ -34,15 +44,25 @@ void dichoInsertAtPos(unsigned char pos, unsigned char index, unsigned char val)
     tabDichoIdxs[idx] = index;
     dichoNbVal +=1;
 }
+#endif // USE_C_DICHOBUF
 
 void dichoInsert (unsigned char index, unsigned char val){
-    unsigned char insPos;
     
+#ifdef USE_C_DICHOBUF
+
+    unsigned char insPos;
+
     // recherche de la postion d'insertion
     insPos = dichoSearchPos(val);
 
     // insertion
     dichoInsertAtPos(insPos, index, val);
+#else
+    dichoInsertVal = val;
+    dichoInsertIdx = index;
+    dichoASMInsert();
+
+#endif //  USE_C_DICHOBUF
 }
 
 // void displayTable(){

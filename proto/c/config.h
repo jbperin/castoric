@@ -19,6 +19,8 @@
 #define     USE_C_EXP
 #define     USE_C_DISTOFFSETSLICES
 #define     USE_C_GENERIC_COLLISION
+#define     USE_C_DICHOBUF
+
 #else
 
 #undef     USE_C_DDA
@@ -34,6 +36,8 @@
 #define   USE_ASM_LOGTRIGO
 #undef USE_C_GENERIC_COLLISION
 #define USE_SLOW_TEXEL
+#undef     USE_C_DICHOBUF
+
 #endif
 
 #endif // CONFIG_H

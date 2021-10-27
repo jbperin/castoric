@@ -23,7 +23,7 @@
 
 #ifdef USE_SPRITE
 #include "sprite.c"
-// #include "texture_key.h"
+#include "texture_key.h"
 #include "texture_soldier_back_00.h"
 #include "texture_soldier_front_00.h"
 #include "texture_soldier_left_00.h"
@@ -33,7 +33,7 @@
 #define CHANGE_INK_TO_BLACK	            0
 #define CHANGE_INK_TO_RED	            1		
 #define CHANGE_INK_TO_GREEN	            2		
-#define CHANGE_INK_TO_BLUE	            4		
+#define CHANGE_INK_TO_BLUE	            4	 
 
 #include "dichobuf.c"
 #include "dist.c"
@@ -70,7 +70,7 @@ void initCamera(){
 void gameLoop() {
     int ii;
     engInitObjects();
-    // engAddObject(OBJ_KEY, 3, 3, 0);
+    engAddObject(OBJ_KEY, 3, 3, 0);
     engAddObject(OBJ_SOLDIER, 1, 2, soldier_data);
 
     while (running) {
@@ -90,12 +90,6 @@ void gameLoop() {
         dichoInit();
         engPulse();
 
-        ii= dichoNbVal;
-        while (ii >0) {
-            ii -= 1;
-            // printf("%d\t", tabDichoIdxs[ii]);
-            drawSprite (objPosX[tabDichoIdxs[ii]], objPosY[tabDichoIdxs[ii]], objTexture[tabDichoIdxs[ii]]);
-        }
 
 
         if (refreshNeeded) {
@@ -119,7 +113,14 @@ void gameLoop() {
             refreshNeeded = 0;
             // printf("\n(X=%d Y=%d) [a=%d] [t=%d]\n\n", rayCamPosX, rayCamPosY, rayCamRotZ, 65535-deek(630));
             // if (hasKey) printf ("Key");
-        }       
+        }      
+        ii= dichoNbVal;
+        while (ii >0) {
+            ii -= 1;
+            // printf("%d\t", tabDichoIdxs[ii]);
+            drawSprite (objPosX[tabDichoIdxs[ii]], objPosY[tabDichoIdxs[ii]], objTexture[tabDichoIdxs[ii]]);
+        }
+
     }
 }
 
