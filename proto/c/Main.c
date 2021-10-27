@@ -77,23 +77,23 @@ void gameLoop() {
     engAddObject(OBJ_HEALTH, 3, 3, 0);
     objTexture[1] = texture_health;
 
-    // engAddObject(OBJ_AMMO, -3, 3, 0);
-    // objTexture[2] = texture_ammo;
+    engAddObject(OBJ_AMMO, -3, 3, 0);
+    objTexture[2] = texture_ammo;
 
 
     while (running) {
 
         doke(630,0);
 
-        if ((doorState==1) && (scene_00[2+4*2] != 6)) {
-            scene_00[2+4*2] ++;
-            scene_00[2+5*2] ++;
-            if (scene_00[2+4*2] == 6) doorState = 0;
-            initScene (scene_00, texture_00);
-            refreshNeeded = 1;
-        } else {
+        // if ((doorState==1) && (scene_00[2+4*2] != 6)) {
+        //     scene_00[2+4*2] ++;
+        //     scene_00[2+5*2] ++;
+        //     if (scene_00[2+4*2] == 6) doorState = 0;
+        //     initScene (scene_00, texture_00);
+        //     refreshNeeded = 1;
+        // } else {
             player ();
-        }
+        // }
 
         dichoInit();
         engPulse();
@@ -108,10 +108,27 @@ void gameLoop() {
 
             drawWalls();
 #ifdef USE_SPRITE
+            // HEALTH
             if ((rayCamPosX == 3) && (rayCamPosY == 3)){
                 if (objActive[1] == 1) {
                     zap();
                     objActive[1] = 0;
+                    *((unsigned char *)49048)= 49;
+                    *((unsigned char *)49088)= 49;
+                    *((unsigned char *)49049)= 48;
+                    *((unsigned char *)49089)= 48;
+                }
+            }
+            // AMMO
+            if ((rayCamPosX == -3) && (rayCamPosY == 3)){
+                if (objActive[2] == 1) {
+                    zap();
+                    objActive[2] = 0;
+                    *((unsigned char *)49065)= 49;
+                    *((unsigned char *)49105)= 49;
+                    *((unsigned char *)49066)= 50;
+                    *((unsigned char *)49106)= 50;
+
                 }
             }
 #endif
@@ -138,8 +155,8 @@ void main(){
     
     // [ref scene_load]
     initScene (scene_00, texture_00);
-    hasKey = 0;
-    doorState == 2;
+    // hasKey = 0;
+    // doorState == 2;
 #ifdef DEBUG
 
     rayInitCasting();
@@ -170,16 +187,16 @@ void main(){
     *((unsigned char *)49004)= 124;
     *((unsigned char *)49044)= 124;
     *((unsigned char *)49084)= 124;
-    *((unsigned char *)49007)= 80;
-    *((unsigned char *)49008)= 69;
-    *((unsigned char *)49009)= 65;
-    *((unsigned char *)49010)= 67;
-    *((unsigned char *)49011)= 69;
-    *((unsigned char *)49012)= 20;
-    *((unsigned char *)49048)= 49;
-    *((unsigned char *)49088)= 49;
-    *((unsigned char *)49049)= 48;
-    *((unsigned char *)49089)= 48;
+    *((unsigned char *)49007)= 72; // H
+    *((unsigned char *)49008)= 69; // E
+    *((unsigned char *)49009)= 65; // A
+    *((unsigned char *)49010)= 76; // L
+    *((unsigned char *)49011)= 84; // T
+    *((unsigned char *)49012)= 72; // H
+    *((unsigned char *)49048)= 20;
+    *((unsigned char *)49088)= 20;
+    *((unsigned char *)49049)= 53;
+    *((unsigned char *)49089)= 53;
     *((unsigned char *)49050)= 48;
     *((unsigned char *)49090)= 48;
     *((unsigned char *)49051)= 37;
@@ -201,25 +218,25 @@ void main(){
     *((unsigned char *)49021)= 124;
     *((unsigned char *)49061)= 124;
     *((unsigned char *)49101)= 124;
-    *((unsigned char *)49023)= 76;
-    *((unsigned char *)49024)= 79;
-    *((unsigned char *)49025)= 86;
-    *((unsigned char *)49026)= 69;
-    *((unsigned char *)49065)= 49;
-    *((unsigned char *)49105)= 49;
-    *((unsigned char *)49066)= 50;
-    *((unsigned char *)49106)= 50;
+    *((unsigned char *)49023)= 65; // A
+    *((unsigned char *)49024)= 77; // M
+    *((unsigned char *)49025)= 77; // M
+    *((unsigned char *)49026)= 79; // O
+    *((unsigned char *)49065)= 48;
+    *((unsigned char *)49105)= 48;
+    *((unsigned char *)49066)= 48;
+    *((unsigned char *)49106)= 48;
     *((unsigned char *)49028)= 124;
     *((unsigned char *)49068)= 124;
     *((unsigned char *)49108)= 124;
-    *((unsigned char *)49030)= 70;
-    *((unsigned char *)49031)= 76;
-    *((unsigned char *)49032)= 79;
-    *((unsigned char *)49033)= 87;
-    *((unsigned char *)49034)= 69;
-    *((unsigned char *)49035)= 82;
-    *((unsigned char *)49072)= 51;
-    *((unsigned char *)49112)= 51;
+    // *((unsigned char *)49030)= 70;
+    // *((unsigned char *)49031)= 76;
+    // *((unsigned char *)49032)= 79;
+    // *((unsigned char *)49033)= 87;
+    // *((unsigned char *)49034)= 69;
+    // *((unsigned char *)49035)= 82;
+    // *((unsigned char *)49072)= 51;
+    // *((unsigned char *)49112)= 51;
     *((unsigned char *)49036)= 124;
     *((unsigned char *)49076)= 124;
     *((unsigned char *)49116)= 124;

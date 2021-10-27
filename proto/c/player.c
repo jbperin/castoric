@@ -39,9 +39,9 @@ void player () {
     case 81:  // Q
         running = 0; break;
     case 0x20:  // Space
-        if ((rayCamPosY <= -4) && (doorState == 2)){
-            doorState = 1;
-        }
+        // if ((rayCamPosY <= -4) && (doorState == 2)){
+        //     doorState = 1;
+        // }
         break;
     case 88:  // X
         shiftLeft(); refreshNeeded           = 1;break;
