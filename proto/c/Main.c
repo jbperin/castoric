@@ -131,7 +131,7 @@ void lsys(){
 #endif // PROFILER_ENABLE
 
 void gameLoop() {
-
+unsigned char logDist;
 #ifdef USE_SPRITE
     engInitObjects();
     engAddObject(OBJ_TREE, 0, 0, 0);
@@ -197,7 +197,9 @@ void gameLoop() {
             PROFILE_LEAVE(ROUTINE_DRAWWALLS);
             refreshNeeded = 0;
 #ifndef PROFILER_ENABLE            
-            printf("\n(X=%d Y=%d) [a=%d] [t=%d]\n\n", rayCamPosX, rayCamPosY, rayCamRotZ, 65535-deek(630));
+            // printf("\n(X=%d Y=%d) [a=%d] [t=%d]\n\n", rayCamPosX, rayCamPosY, rayCamRotZ, 65535-deek(630));
+            logDist = logdist(rayCamPosX, rayCamPosY, objPosX[1], objPosY[1]);
+            printf("\n(X=%d Y=%d) [a=%d] dist = %d %d \n\n", rayCamPosX, rayCamPosY, rayCamRotZ, logDist, longexp (logDist));
             if (hasKey) printf ("Key");
 #endif
         }
