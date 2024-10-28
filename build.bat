@@ -22,6 +22,8 @@ python tools\precalcTexel.py > proto\c\tabTexelColor.h
 REM [ref config_generate]
 python tools\generateConstants.py > proto\c\constants.h
 
+python tools\precalcAngle2Col.py > proto\c\tabAngle2Col.h
+
 REM [ref texture_file2buffer]
 python tools\texture2buf.py img\bluestone.png > proto\c\texture_bluestone.h
 python tools\texture2buf.py img\logo.png > proto\c\texture_logo.h
@@ -49,3 +51,4 @@ python tools\texture2buf.py img\texture_metalwall.bmp > proto\c\texture_metalwal
 
 
 python tools\texture2buf.py img\tree.bmp > proto\c\texture_tree.h
+
