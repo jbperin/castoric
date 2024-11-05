@@ -153,11 +153,8 @@ extern void elaborateSpriteVisibility();
 unsigned char isVisibleSprite (){
 
     
-    elaborateSpriteVisibility2();
-    //elaborateSpriteVisibility_fullC();
-    {asm(
-            ":breakvisibility:"
-        );}
+    elaborateSpriteVisibility();
+
     return visi_SpriteVisibility;
 }
 
