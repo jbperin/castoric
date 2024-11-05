@@ -1,4 +1,3 @@
-#define USE_SPRITE
 #ifdef USE_SPRITE
 #include "iea2d.c"
 #ifdef __GNUC__
