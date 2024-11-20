@@ -173,35 +173,42 @@ unsigned char isVisibleSprite (){
 
 
 
+
 #ifdef USE_C_COMPUTELOGDIST
+
+signed char     disDeltaX, disDeltaY;
+unsigned char   disLog2Delta;
+unsigned char   disLogDistance;
+
 // Input : objPosX/Y[engCurrentObjectIdx], rayCamPosX/Y
 // Oupt : objAngle, objLogDistance
 void computeLogDistance (){
 
-    signed char     deltaX, deltaY;
-    // signed char     alpha;
-    unsigned char   log2Delta;
-    unsigned int    log2dist;
 
-    deltaX          = objPosX[engCurrentObjectIdx]-rayCamPosX;
-    deltaY          = objPosY[engCurrentObjectIdx]-rayCamPosY;
+    disDeltaX          = objPosX[engCurrentObjectIdx]-rayCamPosX;
+    disDeltaY          = objPosY[engCurrentObjectIdx]-rayCamPosY;
 
-    if ((deltaX == 0) && (deltaY == 0)){
+    if ((disDeltaX == 0) && (disDeltaY == 0)){
         objLogDistance[engCurrentObjectIdx] = 0;
         objAngle[engCurrentObjectIdx] = 0;
         return ;
     }
     
-    objAlpha[engCurrentObjectIdx]  = ATAN2(deltaY, deltaX);
+    objAlpha[engCurrentObjectIdx]  = ATAN2(disDeltaY, disDeltaX);
     objAngle[engCurrentObjectIdx]           = objAlpha[engCurrentObjectIdx]-rayCamRotZ;
 
-    if (abs(deltaX) > abs(deltaY)) {
-        log2Delta = log2_tab[(unsigned char)(abs(deltaX))];
-        objLogDistance[engCurrentObjectIdx] = log2Delta + (unsigned int)tab_1overcos[(unsigned char)objAlpha[engCurrentObjectIdx]];
+    if (abs(disDeltaX) > abs(disDeltaY)) {
+        disLog2Delta = log2_tab[(unsigned char)(abs(disDeltaX))];
+        disLogDistance = disLog2Delta + (unsigned int)tab_1overcos[(unsigned char)objAlpha[engCurrentObjectIdx]];
     } else {
-        log2Delta = log2_tab[(unsigned char)(abs(deltaY))];
-        objLogDistance[engCurrentObjectIdx] = log2Delta + (unsigned int)tab_1oversin[(unsigned char)objAlpha[engCurrentObjectIdx]];
+        disLog2Delta = log2_tab[(unsigned char)(abs(disDeltaY))];
+        disLogDistance = disLog2Delta + (unsigned int)tab_1oversin[(unsigned char)objAlpha[engCurrentObjectIdx]];
     }
-
+    // Compute distance to view Plane because it is the one used to 
+    if (disLogDistance < tab_1overcos[(unsigned char)objAngle[engCurrentObjectIdx]]) {
+        objLogDistance[engCurrentObjectIdx] =  tab_1overcos[(unsigned char)objAngle[engCurrentObjectIdx]]  - disLogDistance ;
+    } else {
+        objLogDistance[engCurrentObjectIdx] =  disLogDistance - tab_1overcos[(unsigned char)objAngle[engCurrentObjectIdx]];
+    }
 }
 #endif // USE_C_COMPUTELOGDIST

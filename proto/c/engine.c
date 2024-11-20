@@ -37,6 +37,11 @@ unsigned char engCurrentObjectIdx;
 // char soldier_data [] = {32};
 void soldierUpdate();
 
+#ifdef USE_C_COMPUTELOGDIST
+// Input : objPosX/Y[engCurrentObjectIdx], rayCamPosX/Y
+// Oupt : objAngle, objLogDistance
+extern void computeLogDistance ();
+#endif
 void engObjectPulse()
 {
     switch (objType[engCurrentObjectIdx])
