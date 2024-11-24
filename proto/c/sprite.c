@@ -61,7 +61,7 @@ unsigned char unCompteur;
 
 void precalcSpriteTexPixelRunthrough(){
 
-    if (spriteHeight > 64) {
+    if (spriteHeight >= 64) {
         idxTexPixel         = 0;
 
         iea2StartValue      = 0;
