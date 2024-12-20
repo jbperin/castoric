@@ -266,8 +266,8 @@ _precalcSpriteTexPixelRunthrough:
 .(
 
 ;     if (spriteHeight >= 64) {
-    lda #64
-    cmp _spriteHeight
+    lda _spriteHeight
+    cmp #64
     bcc spriteSmallerThan64
 
 ;         // idxTexPixel         = 0;
