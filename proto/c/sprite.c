@@ -35,7 +35,7 @@ unsigned char           spriteTexColumn;
 
 
 //precalTexPixelOffset[N] =  Nth value of Incremental Error Algo (nbStep = Height on screen , nbVal = TEXTURE_DIMENSION)
-unsigned char           precalTexPixelOffset[100];
+unsigned char           precalTexPixelOffset[256];
 unsigned char           idxTexPixel;    // run through precalTexPixelOffset
 
 
@@ -59,7 +59,7 @@ unsigned char unCompteur;
 
 // void precalcSpriteTexPixelRunthrough(){
 
-//     if (spriteHeight > 64) {
+//     if (spriteHeight >= 64) {
 //         // idxTexPixel         = 0;
 
 //         // iea2StartValue      = 0;
@@ -376,7 +376,7 @@ extern void colorRightTexel ();
 
 void precalcSpriteTexPixelRunthrough(){
 
-    if (spriteHeight > 64) {
+    if (spriteHeight >= 64) {
         idxTexPixel         = 0;
 
         iea2StartValue      = 0;

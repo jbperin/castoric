@@ -265,10 +265,10 @@ _spritePtrReadTexture .dsb 2
 _precalcSpriteTexPixelRunthrough:
 .(
 
-;     if (spriteHeight > 64) {
+;     if (spriteHeight >= 64) {
     lda #64
     cmp _spriteHeight
-    bcs spriteSmallerThan64
+    bcc spriteSmallerThan64
 
 ;         // idxTexPixel         = 0;
 
