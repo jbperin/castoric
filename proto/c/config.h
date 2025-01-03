@@ -35,7 +35,7 @@
 #undef     USE_C_DDA
 #undef     USE_C_PREDRAW
 #undef     USE_C_TOTO
-#define     USE_C_DRAWWALLS
+#undef     USE_C_DRAWWALLS
 #define     USE_C_VERTCOLBUF
 #undef     USE_C_RAYCAST
 #undef     USE_C_VIEWPORT

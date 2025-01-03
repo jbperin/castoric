@@ -266,7 +266,20 @@ _drawWalls
     lda     #0
     sta     _idxCurrentSlice
 
-    
+#ifdef USE_FOREGROUND
+    ; ptrReadForegroundLeft   = texture_gun;
+    ; ptrReadForegroundRight  = texture_gun+VIEWPORT_HEIGHT;
+    lda #>(_texture_gun)
+    sta _ptrReadForegroundLeft+1
+    lda #<(_texture_gun)
+    sta _ptrReadForegroundLeft
+    clc
+    adc #VIEWPORT_HEIGHT
+    sta _ptrReadForegroundRight
+    lda #>(_texture_gun)
+    adc #0
+    sta _ptrReadForegroundRight+1
+#endif
 ;;     do {
 drawWalls_loop
           
@@ -325,6 +338,25 @@ RightSliceEmpty
             jsr         _drawBufVertCol
             inc         _idxCurrentSlice
             inc         _idxScreenCol
+
+
+#ifdef USE_FOREGROUND
+        ; ptrReadForegroundLeft   += VIEWPORT_HEIGHT*2;
+        ; ptrReadForegroundRight   += VIEWPORT_HEIGHT*2;
+    lda _ptrReadForegroundLeft
+    clc
+    adc #VIEWPORT_HEIGHT*2
+    sta _ptrReadForegroundLeft
+    :.(:bcc skip: inc _ptrReadForegroundLeft+1 :skip:.):
+
+    lda _ptrReadForegroundRight
+    clc
+    adc #VIEWPORT_HEIGHT*2
+    sta _ptrReadForegroundRight
+    :.(:bcc skip: inc _ptrReadForegroundRight+1 :skip:.):
+#endif
+
+
 
 ;;     } while (idxCurrentSlice < NUMBER_OF_SLICE-2);
         lda         _idxCurrentSlice
