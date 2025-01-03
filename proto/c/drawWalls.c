@@ -1,6 +1,11 @@
 #include "config.h"
 #include "tabidxrdtexture.h"
 #include "dda.c"
+#ifdef USE_FOREGROUND
+#include "fg_gun.h"
+extern unsigned char *      ptrReadForegroundLeft;
+extern unsigned char *      ptrReadForegroundRight;
+#endif // USE_FOREGROUND
 
 extern unsigned int         offTexture;
 extern unsigned char *      ptrTexture;             // Address of the texture 
@@ -196,7 +201,10 @@ void drawWalls(){
     prepareDrawSprites ();
 #endif  
     idxCurrentSlice     = 0;
-
+#ifdef USE_FOREGROUND
+    ptrReadForegroundLeft   = texture_gun;
+    ptrReadForegroundRight  = texture_gun+VIEWPORT_HEIGHT;
+#endif // 
     do {
         baseAdr             += 1;
 
@@ -226,7 +234,10 @@ void drawWalls(){
         drawBufVertCol ();
         idxCurrentSlice++;
         idxScreenCol        += 1;
-
+#ifdef USE_FOREGROUND
+        ptrReadForegroundLeft   += VIEWPORT_HEIGHT*2;
+        ptrReadForegroundRight   += VIEWPORT_HEIGHT*2;
+#endif //
     } while (idxCurrentSlice < NUMBER_OF_SLICE-2);
 }
 #else

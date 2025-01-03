@@ -49,3 +49,5 @@ python tools\texture2buf.py img\texture_metalwall.bmp > proto\c\texture_metalwal
 
 
 python tools\texture2buf.py img\tree.bmp > proto\c\texture_tree.h
+
+python tools\img2forgrnd.py img\gun.png > proto\c\fg_gun.h

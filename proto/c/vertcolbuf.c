@@ -1,5 +1,9 @@
 #include "config.h"
 
+#ifdef USE_FOREGROUND
+extern unsigned char *      ptrReadForegroundLeft;
+extern unsigned char *      ptrReadForegroundRight;
+#endif
 unsigned char bufVertColRight[VIEWPORT_HEIGHT+ VIEWPORT_START_LINE];
 unsigned char bufVertColLeft[VIEWPORT_HEIGHT+ VIEWPORT_START_LINE];
 unsigned char idxBufVertCol;
@@ -29,8 +33,23 @@ void drawBufVertCol () {
     baseAdr             = (unsigned char *)(HIRES_SCREEN_ADDRESS + (idxScreenCol>>1));
     theAdr  = (unsigned char *)(baseAdr + (int)((multi120_high[VIEWPORT_START_LINE]<<8) | multi120_low[VIEWPORT_START_LINE])); 
 
-
+        // (ptrReadForegroundLeft[idxBufVertCol]==EMPTY_ALPHA)?bufVertColLeft[idxBufVertCol]:ptrReadForegroundLeft[idxBufVertCol]
+        // (ptrReadForegroundRight[idxBufVertCol]==EMPTY_ALPHA)?bufVertColRight[idxBufVertCol]:ptrReadForegroundRight[idxBufVertCol]
     for (idxBufVertCol = 0; idxBufVertCol < VIEWPORT_HEIGHT; ) {
+#ifdef USE_FOREGROUND
+#ifndef __GNUC__
+        *theAdr  = tabLeftRed[(ptrReadForegroundLeft[idxBufVertCol]==EMPTY_ALPHA)?bufVertColLeft[idxBufVertCol]:ptrReadForegroundLeft[idxBufVertCol]] | tabRightRed[(ptrReadForegroundRight[idxBufVertCol]==EMPTY_ALPHA)?bufVertColRight[idxBufVertCol]:ptrReadForegroundRight[idxBufVertCol]];
+#endif
+        theAdr += NEXT_SCANLINE_INCREMENT;
+#ifndef __GNUC__
+        *theAdr  = tabLeftGreen[(ptrReadForegroundLeft[idxBufVertCol]==EMPTY_ALPHA)?bufVertColLeft[idxBufVertCol]:ptrReadForegroundLeft[idxBufVertCol]] | tabRightGreen[(ptrReadForegroundRight[idxBufVertCol]==EMPTY_ALPHA)?bufVertColRight[idxBufVertCol]:ptrReadForegroundRight[idxBufVertCol]];
+#endif
+        theAdr += NEXT_SCANLINE_INCREMENT;
+#ifndef __GNUC__
+        *theAdr  = tabLeftBlue[(ptrReadForegroundLeft[idxBufVertCol]==EMPTY_ALPHA)?bufVertColLeft[idxBufVertCol]:ptrReadForegroundLeft[idxBufVertCol]] | tabRightBlue[(ptrReadForegroundRight[idxBufVertCol]==EMPTY_ALPHA)?bufVertColRight[idxBufVertCol]:ptrReadForegroundRight[idxBufVertCol]];
+#endif
+        theAdr += NEXT_SCANLINE_INCREMENT;
+#else
 #ifndef __GNUC__
         *theAdr  = tabLeftRed[bufVertColLeft[idxBufVertCol]] | tabRightRed[bufVertColRight[idxBufVertCol]];
 #endif
@@ -44,6 +63,7 @@ void drawBufVertCol () {
 #endif
         theAdr += NEXT_SCANLINE_INCREMENT;
 
+#endif // USE_FOREGROUND
         idxBufVertCol++;
     }
 }
