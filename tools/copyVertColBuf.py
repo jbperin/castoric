@@ -105,7 +105,12 @@ def main ():
 
 	for ii in range (config.VIEWPORT_HEIGHT):
 		content += f"""ldy #{ii} ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+{ii})*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:

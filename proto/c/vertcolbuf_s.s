@@ -149,7 +149,12 @@ colorLeft .dsb 1
 _drawBufVertCol
 	lda _idxScreenCol: lsr: tax 
 ldy #0 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+0)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -157,7 +162,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+0)*3+1),x
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+0)*3+2),x
 ldy #1 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+1)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -165,7 +175,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+1)*3+1),x
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+1)*3+2),x
 ldy #2 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+2)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -173,7 +188,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+2)*3+1),x
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+2)*3+2),x
 ldy #3 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+3)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -181,7 +201,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+3)*3+1),x
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+3)*3+2),x
 ldy #4 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+4)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -189,7 +214,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+4)*3+1),x
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+4)*3+2),x
 ldy #5 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+5)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -197,7 +227,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+5)*3+1),x
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+5)*3+2),x
 ldy #6 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+6)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -205,7 +240,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+6)*3+1),x
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+6)*3+2),x
 ldy #7 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+7)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -213,7 +253,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+7)*3+1),x
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+7)*3+2),x
 ldy #8 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+8)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -221,7 +266,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+8)*3+1),x
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+8)*3+2),x
 ldy #9 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+9)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -229,7 +279,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+9)*3+1),x
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+9)*3+2),x
 ldy #10 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+10)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -237,7 +292,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+10)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+10)*3+2),x
 ldy #11 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+11)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -245,7 +305,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+11)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+11)*3+2),x
 ldy #12 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+12)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -253,7 +318,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+12)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+12)*3+2),x
 ldy #13 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+13)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -261,7 +331,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+13)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+13)*3+2),x
 ldy #14 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+14)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -269,7 +344,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+14)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+14)*3+2),x
 ldy #15 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+15)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -277,7 +357,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+15)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+15)*3+2),x
 ldy #16 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+16)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -285,7 +370,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+16)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+16)*3+2),x
 ldy #17 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+17)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -293,7 +383,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+17)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+17)*3+2),x
 ldy #18 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+18)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -301,7 +396,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+18)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+18)*3+2),x
 ldy #19 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+19)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -309,7 +409,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+19)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+19)*3+2),x
 ldy #20 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+20)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -317,7 +422,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+20)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+20)*3+2),x
 ldy #21 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+21)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -325,7 +435,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+21)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+21)*3+2),x
 ldy #22 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+22)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -333,7 +448,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+22)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+22)*3+2),x
 ldy #23 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+23)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -341,7 +461,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+23)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+23)*3+2),x
 ldy #24 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+24)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -349,7 +474,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+24)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+24)*3+2),x
 ldy #25 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+25)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -357,7 +487,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+25)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+25)*3+2),x
 ldy #26 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+26)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -365,7 +500,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+26)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+26)*3+2),x
 ldy #27 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+27)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -373,7 +513,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+27)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+27)*3+2),x
 ldy #28 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+28)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -381,7 +526,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+28)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+28)*3+2),x
 ldy #29 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+29)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -389,7 +539,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+29)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+29)*3+2),x
 ldy #30 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+30)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -397,7 +552,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+30)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+30)*3+2),x
 ldy #31 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+31)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -405,7 +565,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+31)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+31)*3+2),x
 ldy #32 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+32)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -413,7 +578,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+32)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+32)*3+2),x
 ldy #33 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+33)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -421,7 +591,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+33)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+33)*3+2),x
 ldy #34 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+34)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -429,7 +604,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+34)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+34)*3+2),x
 ldy #35 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+35)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -437,7 +617,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+35)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+35)*3+2),x
 ldy #36 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+36)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -445,7 +630,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+36)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+36)*3+2),x
 ldy #37 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+37)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -453,7 +643,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+37)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+37)*3+2),x
 ldy #38 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+38)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -461,7 +656,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+38)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+38)*3+2),x
 ldy #39 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+39)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -469,7 +669,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+39)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+39)*3+2),x
 ldy #40 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+40)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -477,7 +682,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+40)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+40)*3+2),x
 ldy #41 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+41)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -485,7 +695,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+41)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+41)*3+2),x
 ldy #42 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+42)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -493,7 +708,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+42)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+42)*3+2),x
 ldy #43 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+43)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -501,7 +721,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+43)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+43)*3+2),x
 ldy #44 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+44)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -509,7 +734,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+44)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+44)*3+2),x
 ldy #45 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+45)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -517,7 +747,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+45)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+45)*3+2),x
 ldy #46 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+46)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -525,7 +760,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+46)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+46)*3+2),x
 ldy #47 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+47)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -533,7 +773,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+47)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+47)*3+2),x
 ldy #48 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+48)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -541,7 +786,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+48)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+48)*3+2),x
 ldy #49 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+49)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -549,7 +799,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+49)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+49)*3+2),x
 ldy #50 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+50)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -557,7 +812,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+50)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+50)*3+2),x
 ldy #51 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+51)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -565,7 +825,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+51)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+51)*3+2),x
 ldy #52 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+52)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -573,7 +838,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+52)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+52)*3+2),x
 ldy #53 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+53)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -581,7 +851,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+53)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+53)*3+2),x
 ldy #54 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+54)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -589,7 +864,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+54)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+54)*3+2),x
 ldy #55 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+55)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -597,7 +877,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+55)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+55)*3+2),x
 ldy #56 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+56)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -605,7 +890,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+56)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+56)*3+2),x
 ldy #57 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+57)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -613,7 +903,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+57)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+57)*3+2),x
 ldy #58 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+58)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
@@ -621,7 +916,12 @@ sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+58)*3+1),
 ldy colorLeft: lda _tabLeftBlue, y: ldy colorRight: ora _tabRightBlue, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+58)*3+2),x
 ldy #59 ;; idxBufVertCol
+#ifdef USE_FOREGROUND
+lda (_ptrReadForegroundLeft),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColLeft,y : skip_foreground:.):sta colorLeft
+lda (_ptrReadForegroundRight),y: cmp #EMPTY_ALPHA: .(: bne skip_foreground : lda _bufVertColRight,y : skip_foreground:.):sta colorRight
+#else
 lda _bufVertColLeft,y: sta colorLeft: lda _bufVertColRight,y: sta colorRight:
+#endif
 ldy colorLeft: lda _tabLeftRed, y: ldy colorRight: ora _tabRightRed, y:
 sta HIRES_SCREEN_ADDRESS+NEXT_SCANLINE_INCREMENT*((VIEWPORT_START_LINE+59)*3+0),x
 ldy colorLeft: lda _tabLeftGreen, y: ldy colorRight: ora _tabRightGreen, y:
