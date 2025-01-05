@@ -2,7 +2,9 @@
 // Author : Jean-Baptiste PERIN
 // Date : 2021
 
+#ifndef RAYTABLE_IN_OVERLAY
 #include "tabTexelColor.h"
+#endif
 
 extern unsigned char *theAdr;
 

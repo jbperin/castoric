@@ -13,10 +13,11 @@ extern unsigned char *      ptrTexture;             // Address of the texture
 #ifdef __GNUC__
 unsigned char *             ptrOffsetIndex;
 unsigned char *             ptrTexture;             // Address of the texture 
+unsigned char               nxtOffsetIndex;
 #else 
 extern unsigned char *      ptrOffsetIndex;
+extern unsigned char               nxtOffsetIndex;
 #endif
-unsigned char               nxtOffsetIndex;
 
 
 #ifdef USE_C_DRAWWALLS

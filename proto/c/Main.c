@@ -33,7 +33,7 @@
 #include "dichobuf.c"
 #include "engine.c"
 #ifdef USE_SPRITE
-#include "dist.c"
+// #include "dist.c"
 #include "sprite.c"
 #include "texture_key.h"
 #include "texture_tree.h"
@@ -82,23 +82,23 @@ void keyPressed(unsigned char c){
 	// printf ("kp: %x, ", c);
     if (c == keyForward) {
             forward(); 
-            refreshNeeded   = 1;
+            // refreshNeeded   = 1;
     } else if (c == keyBackward) {
             backward();
-            refreshNeeded   = 1;
+            // refreshNeeded   = 1;
     } else if (c == keyTurnLeft) {
             rayCamRotZ      += ROT_ANGLE_STEP;
             RayLeftAlpha    = rayCamRotZ + HALF_FOV_FIX_ANGLE;
-            refreshNeeded   = 1;
+            // refreshNeeded   = 1;
     } else if (c == keyTurnRight) {
             rayCamRotZ      -= ROT_ANGLE_STEP; 
             RayLeftAlpha    = rayCamRotZ + HALF_FOV_FIX_ANGLE;
-            refreshNeeded   = 1;
+            // refreshNeeded   = 1;
     } else if (c == keyStraffeRight) {
-            refreshNeeded           = 1;
+            // refreshNeeded           = 1;
             shiftRight();
     } else if (c == keyStraffeLeft) {
-            refreshNeeded           = 1;
+            // refreshNeeded           = 1;
             shiftLeft();
     } else if (c == keyQuit) {
             running = 0;
@@ -126,7 +126,7 @@ void lsys(){
 }
 #else
 void lsys(){
-    refreshNeeded           = 1;
+    // refreshNeeded           = 1;
 }
 #endif // PROFILER_ENABLE
 
@@ -161,7 +161,7 @@ void gameLoop() {
             scene_00[2+5*2] ++;
             if (scene_00[2+4*2] == 6) doorState = 0;
             initScene (scene_00, texture_00);
-            refreshNeeded = 1;
+            // refreshNeeded = 1;
         } else {
             // player ();
             lsys();
@@ -174,15 +174,14 @@ void gameLoop() {
         if ((objPosX[1] == 0) && (objPosY[1] == -5)) running = 0;
 #endif // PROFILER_ENABLE
 
-        if (refreshNeeded) {
-            rayInitCasting();
+        rayInitCasting();
 
-            rayProcessPoints();
-            rayProcessWalls();
+        rayProcessPoints();
+        rayProcessWalls();
 
-            // clearViewport();
-            PROFILE_ENTER(ROUTINE_DRAWWALLS);
-            drawWalls();
+        // clearViewport();
+        PROFILE_ENTER(ROUTINE_DRAWWALLS);
+        drawWalls();
 #ifdef USE_SPRITE
 //             // logdist(signed char posX, signed char posY) 
 //             if ((rayCamPosX == 0) && (rayCamPosY == 0)){
@@ -194,13 +193,11 @@ void gameLoop() {
 //             if (! hasKey) drawSprite (0, 0, texture_aKey);
             // drawSprites ();
 #endif
-            PROFILE_LEAVE(ROUTINE_DRAWWALLS);
-            refreshNeeded = 0;
+        PROFILE_LEAVE(ROUTINE_DRAWWALLS);
 #ifndef PROFILER_ENABLE            
-            printf("\n(X=%d Y=%d) [a=%d] [t=%d]\n\n", rayCamPosX, rayCamPosY, rayCamRotZ, 65535-deek(630));
-            if (hasKey) printf ("Key");
+        printf("\n(X=%d Y=%d) [a=%d] [t=%d]\n\n", rayCamPosX, rayCamPosY, rayCamRotZ, 65535-deek(630));
+        if (hasKey) printf ("Key");
 #endif
-        }
 
 
         // for (ii = 0; ii <= VIEWPORT_HEIGHT; ii++) {
@@ -252,7 +249,6 @@ void main(){
     // drawSprite (6, 6, texture_pillar);
 #endif
     running = 1;
-    refreshNeeded           = 1;
     gameLoop();
 	
 }

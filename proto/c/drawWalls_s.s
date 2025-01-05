@@ -2,7 +2,7 @@
 ;; Date : 2021
 ;; 
 #include "config.h"
-#include "tabAdrTabIdxRd.h"
+#include "raycast/tabAdrTabIdxRd.h"
 .zero 
 
 ;; Variables shared with sprite
@@ -11,6 +11,9 @@ _ptrTexture             .dsb 2 ;; TODO: Remove me cause i am useless
 
 ;; unsigned char *ptrOffsetIndex;
 _ptrOffsetIndex         .dsb 2
+
+;; unsigned char               nxtOffsetIndex;
+_nxtOffsetIndex         .dsb 1 
 
 .text
 

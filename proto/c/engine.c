@@ -68,7 +68,19 @@ void engPulse() {
 }
 #endif // USE_C_ENGINEPULSE
 
-unsigned char computeRelativeOrientation (signed char direction, signed char rayCamRotZ);
+// unsigned char computeRelativeOrientation (signed char direction, signed char rayCamRotZ);
+
+unsigned char computeRelativeOrientation (signed char dirP, signed char dirC) {
+    unsigned char res;
+    signed char reldiff;
+    unsigned char absdiff;
+
+    reldiff  = dirP - dirC + 32;
+    absdiff = (unsigned char)(reldiff);
+
+    res = absdiff >> 6;
+    return res;
+}
 // void keyUpdate()
 // {
 // 	// unsigned char ex = objPosX[engCurrentObjectIdx];
@@ -143,7 +155,7 @@ void soldierUpdate()
             break;
     }
 #endif
-    refreshNeeded = 1;
+    // refreshNeeded = 1;
 }
 #ifdef USE_C_ENGINEPULSE
 void engInitObjects()

@@ -1,5 +1,8 @@
 
 
+#ifdef RAYTABLE_IN_OVERLAY
+extern unsigned char atan_tab[];
+#else
 unsigned char atan_tab[] = {
             0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
             0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
@@ -34,6 +37,12 @@ unsigned char atan_tab[] = {
             0x19,0x19,0x19,0x1a,0x1a,0x1b,0x1b,0x1c,
             0x1c,0x1c,0x1d,0x1d,0x1e,0x1e,0x1f,0x1f
 };
+#endif //RAYTABLE_IN_OVERLAY
+
+
+#ifdef RAYTABLE_IN_OVERLAY
+extern unsigned char octant_adjust[];
+#else
 
 unsigned char octant_adjust[] = {
         0x3F, // 0b00111111, //        ;; x+,y+,|x|>|y|
@@ -45,7 +54,12 @@ unsigned char octant_adjust[] = {
         0xBF, // 0b10111111, //        ;; x-,y-,|x|>|y|
         0x80, // 0b10000000, //        ;; x-,y-,|x|<|y|
 };
+#endif //RAYTABLE_IN_OVERLAY
 
+
+#ifdef RAYTABLE_IN_OVERLAY
+extern unsigned char tab_exp[];
+#else
 unsigned char tab_exp[] = {
     0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 
     0x01, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 
@@ -64,22 +78,38 @@ unsigned char tab_exp[] = {
     0x80, 0x83, 0x86, 0x89, 0x8c, 0x8f, 0x92, 0x95, 0x98, 0x9c, 0x9f, 0xa2, 0xa6, 0xaa, 0xad, 0xb1, 
     0xb5, 0xb9, 0xbd, 0xc1, 0xc5, 0xca, 0xce, 0xd3, 0xd7, 0xdc, 0xe1, 0xe6, 0xeb, 0xf0, 0xf5, 0xfb
 };
+#endif //RAYTABLE_IN_OVERLAY
 
+#ifdef RAYTABLE_IN_OVERLAY
+extern unsigned char tab_exp_extended[];
+#else
 unsigned char tab_exp_extended[] = {
     0, 6, 11, 17, 23, 29, 36, 42, 
     48, 55, 62, 69, 76, 83, 91, 98, 
     106, 114, 122, 130, 139, 147, 156, 165, 
     175, 184, 194, 203, 214, 224, 234, 245, 255 /* FIXME Should be 256 */};
+#endif //RAYTABLE_IN_OVERLAY
 
+#ifdef RAYTABLE_IN_OVERLAY
+extern unsigned char tab_exp_extended2[];
+#else
 unsigned char tab_exp_extended2[] = {
     11, 23, 34, 46, 59, 71, 84, 97, 
     110, 124, 138, 152, 167, 181, 197, 212, 
     228, 244};
+#endif //RAYTABLE_IN_OVERLAY
 
+#ifdef RAYTABLE_IN_OVERLAY
+extern unsigned char tab_exp_extended3[];
+#else
 unsigned char tab_exp_extended3[] = {
     17, 34, 51, 69, 87, 105, 124, 143, 163, 183, 204, 225, 246};
+#endif //RAYTABLE_IN_OVERLAY
 
 // log2(x)*32 
+#ifdef RAYTABLE_IN_OVERLAY
+extern  unsigned char log2_tab[];
+#else
 unsigned char log2_tab[] = {
         0x00,0x00,0x20,0x32,0x40,0x4a,0x52,0x59,
         0x60,0x65,0x6a,0x6e,0x72,0x76,0x79,0x7d,
@@ -114,7 +144,7 @@ unsigned char log2_tab[] = {
         0xfd,0xfd,0xfd,0xfd,0xfd,0xfd,0xfe,0xfe,
         0xfe,0xfe,0xfe,0xff,0xff,0xff,0xff,0xff
 };
-
+#endif //RAYTABLE_IN_OVERLAY
 
 signed char log2sin(unsigned char x){
     return tabLog2Sin[x];

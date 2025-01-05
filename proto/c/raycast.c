@@ -89,7 +89,9 @@ extern unsigned char tab_1overcos[];
 // castoric> python tools\precalcDistance2Height.py > proto\c\tabunlogd2hh.h
 #include "tabunlogd2hh.h"
 
+#ifndef RAYTABLE_IN_OVERLAY
 #include "tabMulti.h"
+#endif
 
 #include "math.c"
 

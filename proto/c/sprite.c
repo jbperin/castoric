@@ -2,6 +2,8 @@
 #ifdef __GNUC__
 #include <string.h>
 #endif
+signed char     objAngleRight;
+signed char     objAngleLeft;
 
 
 signed char         spriteViewportColIdx, spriteViewportLinIdx;
@@ -130,7 +132,67 @@ extern void colorLeftTexel ();
 extern void colorRightTexel ();
 
 
-#define min(x,y)          (((x)<(y))?(x):(y))
+// #define min(x,y)          (((x)<(y))?(x):(y))
+
+
+extern signed char tab3Sin[];
+extern signed char tab3Cos[];
+
+signed char     objX;
+signed char     objY;
+
+
+signed char     visi_beta;
+signed char visi_incX, visi_incY;
+signed char visi_angleRight, visi_angleLeft;
+
+// 0 not visible, 1 center visible, 2 only right side visible, 3 only left side visible
+unsigned char visi_SpriteVisibility;
+    
+
+#ifdef USE_C_SPRITEVISIBILITY
+void elaborateSpriteVisibility(void) {
+
+    visi_SpriteVisibility = 0;
+
+    if (abs(objAngle[engCurrentObjectIdx]) < HALF_FOV_FIX_ANGLE){
+        visi_SpriteVisibility = 1;
+        return;
+    }
+
+    visi_beta            = objAlpha[engCurrentObjectIdx] - 64; 
+
+    visi_incX            = tab3Cos[(unsigned char)visi_beta];
+    visi_incY            = tab3Sin[(unsigned char)visi_beta];
+
+    visi_angleRight          = ATAN2(objY+visi_incY - rayCamPosY, objX+visi_incX - rayCamPosX)-rayCamRotZ;
+    visi_angleLeft           = ATAN2(objY-visi_incY - rayCamPosY, objX-visi_incX - rayCamPosX)-rayCamRotZ;
+
+    if (abs(visi_angleRight) < HALF_FOV_FIX_ANGLE) {
+        objAngleRight = visi_angleRight;
+        visi_SpriteVisibility = 2;
+        return;
+    }
+    if (abs(visi_angleLeft) < HALF_FOV_FIX_ANGLE){
+        objAngleLeft = visi_angleLeft;
+        visi_SpriteVisibility = 3;
+        return;
+    }
+}
+#else
+extern void elaborateSpriteVisibility();
+#endif
+
+
+// Input : objX/Y, rayCamPosX/Y
+// Ouptut : objAngle, objAngleRight, objAngleLeft
+unsigned char isVisibleSprite (){
+
+    
+    elaborateSpriteVisibility();
+
+    return visi_SpriteVisibility;
+}
 
 
 

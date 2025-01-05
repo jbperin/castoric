@@ -8,7 +8,7 @@ python tools\precalcLogTrigo.py > proto\c\tablogtrigo.h
 python tools\precalcRayAngle.py > proto\c\tabrayangle.h
 
 python tools\precalcTextureIndex.py > proto\c\tabIdxRdTexture.h
-python tools\precalcIdxOfIdxRd.py > proto\c\tabAdrTabIdxRd.h
+python tools\precalcIdxOfIdxRd.py > proto\c\raycast\tabAdrTabIdxRd.h
 
 REM [ref config_viewport]
 REM python tools\clearViewport.py > proto\c\viewport_s.s
